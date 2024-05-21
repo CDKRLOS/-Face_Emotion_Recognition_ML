@@ -4,14 +4,25 @@ import numpy as np
 
 from utils import get_face_landmarks
 
-data_dir = './data'
+data_dir = './data_train'
 
 output = []
 for emotion_indx, emotion in enumerate(sorted(os.listdir(data_dir))):
-    for image_path_ in os.listdir(os.path.join(data_dir, emotion)):
-        image_path = os.path.join(data_dir, emotion, image_path_)
+    emotion_dir = os.path.join(data_dir, emotion)
+    for image_name in os.listdir(emotion_dir):
+        image_path = os.path.join(emotion_dir, image_name)
+
+        print(f"Processing image: {image_path}")
+
+        if not os.path.isfile(image_path):
+            print(f"File does not exist: {image_path}")
+            continue
 
         image = cv2.imread(image_path)
+
+        if image is None:
+            print(f"Failed to read image: {image_path}")
+            continue
 
         face_landmarks = get_face_landmarks(image)
 
