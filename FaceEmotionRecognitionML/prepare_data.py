@@ -4,7 +4,7 @@ import numpy as np
 
 from utils import get_face_landmarks
 
-data_dir = './data_train'
+data_dir = './data_train_3'
 
 output = []
 for emotion_indx, emotion in enumerate(sorted(os.listdir(data_dir))):
